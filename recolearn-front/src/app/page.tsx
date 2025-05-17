@@ -1,3 +1,5 @@
+import { Typography } from "@mui/material";
+
 export default function Home() {
-  return <h1>RecomLearn</h1>;
+  return <Typography sx={{color: "primary.main"}}>RecomLearn</Typography>;
 }
