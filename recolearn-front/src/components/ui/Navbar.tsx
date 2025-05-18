@@ -20,7 +20,7 @@ export const Navbar = () => {
           href="/"
           underline="none"
           sx={{
-            color: "secondary.main",
+            color: "#fff",
             letterSpacing: "1px",
             fontSize: "1.25rem"
           }}
@@ -43,7 +43,7 @@ export const Navbar = () => {
                   },
                 }}
               >
-                <NotificationsNoneRoundedIcon sx={{ color: "#fff" }} />
+                <NotificationsNoneRoundedIcon sx={{ color: "#fff" }} fontSize="small" />
               </Badge>
             </IconButton>
 
@@ -60,7 +60,7 @@ export const Navbar = () => {
                   },
                 }}
               >
-                <ChatBubbleOutlineRoundedIcon sx={{ color: "#fff" }} />
+                <ChatBubbleOutlineRoundedIcon sx={{ color: "#fff" }} fontSize="small" />
               </Badge>
             </IconButton>
           </Box>
@@ -69,12 +69,12 @@ export const Navbar = () => {
             endIcon={<Avatar userName="Diana David Pool Pan" />}
             sx={{
               textTransform: "uppercase",
-              fontWeight: "300",
-              fontSize: "0.9rem",
+              fontWeight: 300,
+              fontSize: "1rem",
               color: "#fff",
             }}
           >
-            Diana David Pool Pan {" "}
+            Diana David Pool Pan
           </Button>
         </Box>
       </Toolbar>

@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import { baseTheme } from "@/themes";
-import { Navbar } from "@/components";
+import { Navbar, PageHeader } from "@/components";
 
-import "./global.css"
+import "./global.css";
 
-const poppins = Poppins({
+const roboto = Roboto({
   weight: ["300", "400", "500", "600", "700"],
-  style: "normal",
+  style: ["normal", "italic"],
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-roboto",
 });
 
 export const metadata: Metadata = {
@@ -26,11 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${poppins.className}`}>
+    <html lang="es">
+      <body className={`${roboto.className}`}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={baseTheme}>
             <Navbar />
+            <PageHeader />
             {children}
           </ThemeProvider>
         </AppRouterCacheProvider>
