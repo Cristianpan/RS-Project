@@ -1,11 +1,20 @@
-import { Box, Typography, Link as MuiLink, Card, CardContent, Divider } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Link as MuiLink,
+  Card,
+  CardContent,
+  Divider,
+  List,
+  ListItem,
+} from "@mui/material";
 import Link from "next/link";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 
 export default function PreviewTopic() {
   return (
-    <Box sx={{padding: "0.5rem"}}>
+    <Box sx={{ padding: "0.5rem" }}>
       <Box sx={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
         <Box
           sx={{
@@ -25,80 +34,98 @@ export default function PreviewTopic() {
         </Typography>
       </Box>
       <Card
+        variant="outlined"
         sx={{
           backgroundColor: "grey.100",
           height: "auto",
-          border: "none",
-          boxShadow: "none",
           marginTop: "1rem",
         }}
       >
         <CardContent>
           <Box sx={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
             <TipsAndUpdatesIcon
-              sx={{ fontSize: "1.2rem", color: "primary.main" }}
+              sx={{ fontSize: "1.2rem", color: "secondary.500" }}
             />
-            <Typography sx={{ fontSize: "1rem", color: "primary.main" }}>
+            <Typography sx={{ fontSize: "1rem", color: "secondary.500" }}>
               ¡Porque tus amigos no entendieron nada!
             </Typography>
           </Box>
 
           <Divider sx={{ marginTop: "0.8rem", borderColor: "grey.300" }} />
 
-          <Box
+          <List
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "1.2rem",
-              marginTop: "1rem",
+              listStyleType: "disc",
+              pl: 4,
             }}
           >
-            <MuiLink
-              href={`/topic/example`}
-              underline="hover"
-              component={Link}
+            <ListItem
+              disableGutters
               sx={{
-                fontSize: "0.9rem",
-                color: "primary.main",
-                "&:hover": {
-                  color: "secondary.500",
-                  borderColor: "secondary.primary",
-                },
+                display: "list-item",
               }}
             >
-              Recomendación 1 - Duración aproximada: 1 año
-            </MuiLink>
-            <MuiLink
-              href={`/topic/example`}
-              underline="hover"
-              component={Link}
+              <MuiLink
+                href={`/topic/example`}
+                underline="hover"
+                component={Link}
+                sx={{
+                  fontSize: "0.9rem",
+                  color: "primary.main",
+                  "&:hover": {
+                    color: "secondary.500",
+                    borderColor: "secondary.primary",
+                  },
+                }}
+              >
+                Recomendación 1 - Duración aproximada: 1 año
+              </MuiLink>
+            </ListItem>
+            <ListItem
+              disableGutters
               sx={{
-                fontSize: "0.9rem",
-                color: "primary.main",
-                "&:hover": {
-                  color: "secondary.500",
-                  borderColor: "secondary.primary",
-                },
+                display: "list-item",
               }}
             >
-              Recomendación 1 - Duración aproximada: 1 año
-            </MuiLink>
-            <MuiLink
-              href={`/topic/example`}
-              underline="hover"
-              component={Link}
+              <MuiLink
+                href={`/topic/example`}
+                underline="hover"
+                component={Link}
+                sx={{
+                  fontSize: "0.9rem",
+                  color: "primary.main",
+                  "&:hover": {
+                    color: "secondary.500",
+                    borderColor: "secondary.primary",
+                  },
+                }}
+              >
+                Recomendación 1 - Duración aproximada: 1 año
+              </MuiLink>
+            </ListItem>
+            <ListItem
+              disableGutters
               sx={{
-                fontSize: "0.9rem",
-                color: "primary.main",
-                "&:hover": {
-                  color: "secondary.500",
-                  borderColor: "secondary.primary",
-                },
+                display: "list-item",
               }}
             >
-              Recomendación 1 - Duración aproximada: 1 año
-            </MuiLink>
-          </Box>
+              <MuiLink
+                href={`/topic/example`}
+                underline="hover"
+                component={Link}
+                sx={{
+                  fontSize: "0.9rem",
+                  color: "primary.main",
+                  "&:hover": {
+                    color: "secondary.500",
+                    borderColor: "secondary.primary",
+                  },
+                }}
+              >
+                Recomendación 1 - Duración aproximada: 1 año
+              </MuiLink>
+            </ListItem>
+          </List>
         </CardContent>
       </Card>
     </Box>

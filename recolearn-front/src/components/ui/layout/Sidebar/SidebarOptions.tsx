@@ -4,9 +4,9 @@ import Link from "next/link";
 
 export const SidebarOptions = () => {
   return (
-    <CuAccordion title="Mis Cursos">
-      <CuAccordion title="Sistemas de recomendación">
-        <CuAccordion title="Temas">
+    <CuAccordion title="Mis Cursos" href="/courses">
+      <CuAccordion title="Sistemas de recomendación" href="/course/sistemas-de-recomendacion">
+        <CuAccordion title="Unidad 1: Los sistemas de recomendacion">
           <Box
             sx={{
               display: "flex",
@@ -17,28 +17,13 @@ export const SidebarOptions = () => {
           >
             <MuiLink
               component={Link}
-              href={"#"}
+              href={"/topic/preview/example"}
               sx={{ fontSize: "0.9rem", color: "text.primary" }}
               underline="hover"
             >
-              - Tema numero uno
+              Inteligencia artificial y los sistemas de recomendacion
             </MuiLink>
-            <MuiLink
-              component={Link}
-              href={"#"}
-              sx={{ fontSize: "0.9rem", color: "text.primary" }}
-              underline="hover"
-            >
-              - Tema numero dos
-            </MuiLink>
-            <MuiLink
-              component={Link}
-              href={"#"}
-              sx={{ fontSize: "0.9rem", color: "text.primary" }}
-              underline="hover"
-            >
-              - Tema numero tres
-            </MuiLink>
+            
           </Box>
         </CuAccordion>
       </CuAccordion>

@@ -10,9 +10,10 @@ import Link from "next/link";
 interface CuAccordionProps {
   title: string;
   children: React.ReactNode;
+  href?: string
 }
 
-export const CuAccordion = ({ children, title }: CuAccordionProps) => {
+export const CuAccordion = ({ children, title, href = "#" }: CuAccordionProps) => {
   return (
     <Accordion
       sx={{
@@ -36,7 +37,7 @@ export const CuAccordion = ({ children, title }: CuAccordionProps) => {
           },
         }}
       >
-        <MuiLink component={Link} underline="hover" sx={{fontSize: "0.9rem"}} href={"/courses"}>{title}</MuiLink>
+        <MuiLink component={Link} underline="hover" sx={{fontSize: "0.9rem"}} href={href}>{title}</MuiLink>
       </AccordionSummary>
       <AccordionDetails sx={{ padding: "0 8px !important" }}>
         {children}
