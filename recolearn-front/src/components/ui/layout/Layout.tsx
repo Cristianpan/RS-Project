@@ -12,7 +12,7 @@ export const Layout = ({ children }: LayoutProps) => {
     <>
       <Navbar />
       <PageHeader />
-      <Box sx={{ display: "flex", alignItems:"flex-start", gap: "1rem", margin: "0 1rem" }}>
+      <Box sx={{ display: "flex", alignItems:"flex-start", gap: "1rem", margin: "0 1rem 3.5rem 1rem" }}>
         <Sidebar sx={{flex: 1}} />
         <Card variant="outlined" sx={{ padding: "1.2rem 1rem", flex: 4 }}>
           {children}

@@ -19,6 +19,7 @@ export const Unit = ({ title, children }: UnitProps) => {
         border: "none",
         boxShadow: "none",
       }}
+      expanded
     >
       <AccordionSummary
         expandIcon={

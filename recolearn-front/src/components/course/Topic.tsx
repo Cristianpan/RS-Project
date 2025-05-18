@@ -63,7 +63,7 @@ export const Topic = () => {
               }}
             >
               <MuiLink
-                href="#"
+                href={`/topic/example`}
                 underline="hover"
                 component={Link}
                 sx={{
@@ -78,7 +78,7 @@ export const Topic = () => {
                 Recomendación 1 - Duración aproximada: 1 año
               </MuiLink>
               <MuiLink
-                href="#"
+                href={`/topic/example`}
                 underline="hover"
                 component={Link}
                 sx={{
@@ -93,7 +93,7 @@ export const Topic = () => {
                 Recomendación 1 - Duración aproximada: 1 año
               </MuiLink>
               <MuiLink
-                href="#"
+                href={`/topic/example`}
                 underline="hover"
                 component={Link}
                 sx={{
