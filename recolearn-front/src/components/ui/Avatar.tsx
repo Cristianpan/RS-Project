@@ -22,8 +22,7 @@ export const Avatar = ({ userName }: AvatarProps) => {
       sx={{
         bgcolor: "gray.100",
         textTransform: "uppercase",
-        marginLeft: "0.8rem",
-        fontSize: "1rem !important",
+        fontWeight: 400
       }}
       alt={userName}
     >

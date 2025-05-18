@@ -13,7 +13,8 @@ export const baseTheme = createTheme({
       primary: "#3E3F5B",
     },
     grey: {
-      "100": "#EEEEEE",
+      "100": "#EFEFEF",
+      "200": "#DEDEDE",
     },
   },
 });
