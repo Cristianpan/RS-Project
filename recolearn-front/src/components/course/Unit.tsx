@@ -1,42 +1,48 @@
 import {
   Accordion,
   AccordionSummary,
-  Link as MuiLink,
+  Typography,
   AccordionDetails,
 } from "@mui/material";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
-import Link from "next/link";
 
-interface CuAccordionProps {
+interface UnitProps {
   title: string;
   children: React.ReactNode;
 }
 
-export const CuAccordion = ({ children, title }: CuAccordionProps) => {
+export const Unit = ({ title, children }: UnitProps) => {
   return (
     <Accordion
       sx={{
-        padding: 0,
         backgroundColor: "inherit",
         border: "none",
         boxShadow: "none",
       }}
     >
       <AccordionSummary
-        expandIcon={<ArrowForwardIosOutlinedIcon color="primary" sx={{fontSize: "0.8rem"}} />}
+        expandIcon={
+          <ArrowForwardIosOutlinedIcon
+            color="primary"
+            fontSize="medium"
+            fontWeight={700}
+          />
+        }
         sx={{
           flexDirection: "row-reverse",
-          padding: 0,
+          padding: "1rem 0",
           minHeight: "0 !important",
           height: "auto",
           color: "text.primary",
-          "& span": { margin: "0.25rem 0.1rem !important" },
+          "& span": { margin: "0 0.3rem !important" },
           ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
             transform: "rotate(90deg)",
           },
         }}
       >
-        <MuiLink component={Link} underline="hover" sx={{fontSize: "0.9rem"}} href={"/courses"}>{title}</MuiLink>
+        <Typography component="h3" sx={{ fontSize: "1.6rem", fontWeight: 300 }}>
+          {title}
+        </Typography>
       </AccordionSummary>
       <AccordionDetails sx={{ padding: "0 8px !important" }}>
         {children}

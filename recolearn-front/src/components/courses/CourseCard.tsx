@@ -50,7 +50,7 @@ export const CourseCard = ({
             display: "inline-block",
           }}
           component={Link}
-          href={`/my-courses/${title}`}
+          href={`/course/${title}`}
         >
           {title}
         </MuiLink>
