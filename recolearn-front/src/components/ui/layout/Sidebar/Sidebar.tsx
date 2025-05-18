@@ -1,11 +1,15 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import { SidebarOptions } from "./SidebarOptions";
 
-export const Sidebar = () => {
+interface SidebarProps {
+  sx?: object
+}
+
+export const Sidebar = ({sx = {}}: SidebarProps) => {
   return (
     <Card
       variant="outlined"
-      sx={{ margin: "0 1rem", backgroundColor: "grey.100" }}
+      sx={{backgroundColor: "grey.100", height: "auto", ...sx}}
     >
       <CardContent>
         <Typography
