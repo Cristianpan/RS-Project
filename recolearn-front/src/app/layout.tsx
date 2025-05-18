@@ -3,12 +3,13 @@ import { Roboto } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import { baseTheme } from "@/themes";
-import { Navbar, PageHeader } from "@/components";
+import { Navbar, PageHeader, Sidebar } from "@/components";
+import { Box } from "@mui/material";
 
 import "./global.css";
 
 const roboto = Roboto({
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["200", "300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"],
   variable: "--font-roboto",
@@ -32,7 +33,10 @@ export default function RootLayout({
           <ThemeProvider theme={baseTheme}>
             <Navbar />
             <PageHeader />
-            {children}
+            <Box sx={{display: "grid", gridTemplateColumns: "20% 80%"}}>
+              <Sidebar />
+              {children}
+            </Box>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
