@@ -15,12 +15,14 @@
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
     "@mui/material-nextjs": "^7.1.0",
+    "geopattern": "^1.2.3",
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/geopattern": "^1.2.9",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
