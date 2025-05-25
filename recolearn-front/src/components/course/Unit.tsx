@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Accordion,
   AccordionSummary,
@@ -5,6 +7,7 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+import { useState } from "react";
 
 interface UnitProps {
   title: string;
@@ -12,6 +15,13 @@ interface UnitProps {
 }
 
 export const Unit = ({ title, children }: UnitProps) => {
+
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = () => {
+    setExpanded(!expanded);
+  }
+
   return (
     <Accordion
       sx={{
@@ -19,7 +29,8 @@ export const Unit = ({ title, children }: UnitProps) => {
         border: "none",
         boxShadow: "none",
       }}
-      expanded
+      expanded={expanded}
+      onChange={handleChange}
     >
       <AccordionSummary
         expandIcon={
