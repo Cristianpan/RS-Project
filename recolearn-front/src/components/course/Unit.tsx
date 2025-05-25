@@ -7,19 +7,22 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
-import { useState } from "react";
+import useUnitAccordionStore from "@/stores/useUnitAccordions";
 
 interface UnitProps {
+  course: string;
   title: string;
   children: React.ReactNode;
 }
 
-export const Unit = ({ title, children }: UnitProps) => {
+export const Unit = ({ course, title, children }: UnitProps) => {
 
-  const [expanded, setExpanded] = useState(false);
+  const { accordions, toggleAccordion } = useUnitAccordionStore();
 
+  const isOpen = accordions[`${course}-${title}`] || false;
+  
   const handleChange = () => {
-    setExpanded(!expanded);
+    toggleAccordion(course, title);
   }
 
   return (
@@ -29,7 +32,7 @@ export const Unit = ({ title, children }: UnitProps) => {
         border: "none",
         boxShadow: "none",
       }}
-      expanded={expanded}
+      expanded={isOpen}
       onChange={handleChange}
     >
       <AccordionSummary

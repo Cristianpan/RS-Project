@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardContent,
@@ -10,16 +11,19 @@ import geoPattern from "geopattern";
 import Link from "next/link";
 import { useMemo } from "react";
 
+
 interface CourseCardProps {
   title: string;
   subtitle?: string;
   description?: string;
+  slug: string;
 }
 
 export const CourseCard = ({
   title,
   subtitle,
   description,
+  slug,
 }: CourseCardProps) => {
   const geopatternURI = useMemo(() => {
     const pattern = geoPattern.generate(title);
@@ -50,7 +54,7 @@ export const CourseCard = ({
             display: "inline-block",
           }}
           component={Link}
-          href={`/course/${title}`}
+          href={`/course/${slug}`}
         >
           {title}
         </MuiLink>

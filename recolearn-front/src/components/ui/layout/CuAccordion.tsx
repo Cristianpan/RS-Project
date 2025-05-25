@@ -8,7 +8,8 @@ import {
 } from "@mui/material";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import Link from "next/link";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent } from "react";
+import useSidebarStore from "@/stores/useSidebarStore";
 
 interface CuAccordionProps {
   title: string;
@@ -17,14 +18,16 @@ interface CuAccordionProps {
 }
 
 export const CuAccordion = ({ children, title, href }: CuAccordionProps) => {
-  const [expanded, setExpanded] = useState(false);
+  const { accordions, toggleAccordion } = useSidebarStore();
+
+  const isOpen = accordions[title] || false;
 
   const handleChange = (event: SyntheticEvent) => {
     if (
       event.target instanceof SVGElement &&
       event.target.tagName.toLowerCase() === "svg"
     ) {
-      setExpanded((prev) => !prev);
+      toggleAccordion(title);
     }
   };
 
@@ -36,7 +39,7 @@ export const CuAccordion = ({ children, title, href }: CuAccordionProps) => {
         border: "none",
         boxShadow: "none",
       }}
-      expanded={expanded}
+      expanded={isOpen}
       onChange={handleChange}
     >
       <AccordionSummary
