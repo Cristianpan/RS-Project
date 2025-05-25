@@ -1,3 +1,4 @@
+"use client";
 import {
   AppBar,
   Toolbar,
@@ -6,12 +7,27 @@ import {
   IconButton,
   Badge,
   Button,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
 import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
 import { Avatar } from "./Avatar";
 import NextLink from "next/link";
+import { useState } from "react";
+import useAuthStore from "@/stores/useAuthStore";
+
 export const Navbar = () => {
+  const { logout, user } = useAuthStore();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <AppBar position="sticky" sx={{ top: 0, right: 0, padding: "0 1rem" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -22,10 +38,10 @@ export const Navbar = () => {
           sx={{
             color: "#fff",
             letterSpacing: "1px",
-            fontSize: "1.25rem"
+            fontSize: "1.25rem",
           }}
         >
-          RecomLearn | FMAT 
+          RecomLearn | FMAT
         </MLink>
 
         <Box display="flex" alignItems="center" sx={{ gap: "0.5rem" }}>
@@ -43,7 +59,10 @@ export const Navbar = () => {
                   },
                 }}
               >
-                <NotificationsNoneRoundedIcon sx={{ color: "#fff" }} fontSize="small" />
+                <NotificationsNoneRoundedIcon
+                  sx={{ color: "#fff" }}
+                  fontSize="small"
+                />
               </Badge>
             </IconButton>
 
@@ -60,22 +79,44 @@ export const Navbar = () => {
                   },
                 }}
               >
-                <ChatBubbleOutlineRoundedIcon sx={{ color: "#fff" }} fontSize="small" />
+                <ChatBubbleOutlineRoundedIcon
+                  sx={{ color: "#fff" }}
+                  fontSize="small"
+                />
               </Badge>
             </IconButton>
           </Box>
 
-          <Button
-            endIcon={<Avatar userName="Diana David Pool Pan" />}
-            sx={{
-              textTransform: "uppercase",
-              fontWeight: 300,
-              fontSize: "1rem",
-              color: "#fff",
-            }}
-          >
-            Diana David Pool Pan
-          </Button>
+          <div>
+            <Button
+              endIcon={<Avatar userName={user?.name || ""} />}
+              sx={{
+                textTransform: "uppercase",
+                fontWeight: 300,
+                fontSize: "1rem",
+                color: "#fff",
+              }}
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              {user?.name}
+            </Button>
+            <Menu
+              open={open}
+              onClose={handleClose}
+              sx={{
+                "& .MuiMenu-paper": {
+                  top: "3.5rem !important",
+                  left: "auto !important",
+                  right: "2rem !important",
+                },
+              }}
+            >
+              <MenuItem onClick={() => logout()}>Cerrar Sesión</MenuItem>
+            </Menu>
+          </div>
         </Box>
       </Toolbar>
     </AppBar>
