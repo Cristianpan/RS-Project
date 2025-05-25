@@ -2,6 +2,7 @@ import { CourseCard } from "@/components";
 import { Typography, Card, CardContent, Divider, Box } from "@mui/material";
 
 export default function MyCourses() {
+
   return (
     <Card
       variant="outlined"
@@ -22,7 +23,7 @@ export default function MyCourses() {
         <Divider />
 
         <Box sx={{ display: "flex", gap: "1rem", flexWrap: "wrap" , marginTop: "1.2rem"}}>
-          <CourseCard title="Inglés" subtitle="Licenciatura en Ingeniería de Software" />
+          <CourseCard title="Sistemas de recomendación" subtitle="Licenciatura en Ingeniería de Software" slug="sistemas-de-recomendacion" />
         </Box>
       </CardContent>
     </Card>

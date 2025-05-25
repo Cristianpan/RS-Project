@@ -1,19 +1,36 @@
+"use client";
 import {
   Accordion,
   AccordionSummary,
   Link as MuiLink,
   AccordionDetails,
+  Box,
 } from "@mui/material";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import Link from "next/link";
+import { SyntheticEvent } from "react";
+import useSidebarStore from "@/stores/useSidebarStore";
 
 interface CuAccordionProps {
   title: string;
   children: React.ReactNode;
-  href?: string
+  href?: string;
 }
 
-export const CuAccordion = ({ children, title, href = "#" }: CuAccordionProps) => {
+export const CuAccordion = ({ children, title, href }: CuAccordionProps) => {
+  const { accordions, toggleAccordion } = useSidebarStore();
+
+  const isOpen = accordions[title] || false;
+
+  const handleChange = (event: SyntheticEvent) => {
+    if (
+      event.target instanceof SVGElement &&
+      event.target.tagName.toLowerCase() === "svg"
+    ) {
+      toggleAccordion(title);
+    }
+  };
+
   return (
     <Accordion
       sx={{
@@ -22,9 +39,25 @@ export const CuAccordion = ({ children, title, href = "#" }: CuAccordionProps) =
         border: "none",
         boxShadow: "none",
       }}
+      expanded={isOpen}
+      onChange={handleChange}
     >
       <AccordionSummary
-        expandIcon={<ArrowForwardIosOutlinedIcon color="primary" sx={{fontSize: "0.8rem"}} />}
+        expandIcon={
+          <Box
+            sx={{
+              ":hover": { backgroundColor: "grey.300" },
+              padding: "0.3rem 0.3rem 0.1rem 0.3rem",
+              borderRadius: "50%",
+              transition: "background-color 0.1s ease-in-out",
+            }}
+          >
+            <ArrowForwardIosOutlinedIcon
+              color="primary"
+              sx={{ fontSize: "0.8rem" }}
+            />
+          </Box>
+        }
         sx={{
           flexDirection: "row-reverse",
           padding: 0,
@@ -32,12 +65,26 @@ export const CuAccordion = ({ children, title, href = "#" }: CuAccordionProps) =
           height: "auto",
           color: "text.primary",
           "& span": { margin: "0.25rem 0.1rem !important" },
+          ".MuiAccordionSummary-expandIconWrapper:hover": {
+            backgroundColor: "gray.200",
+          },
           ".MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
             transform: "rotate(90deg)",
           },
         }}
       >
-        <MuiLink component={Link} underline="hover" sx={{fontSize: "0.9rem"}} href={href}>{title}</MuiLink>
+        {href ? (
+          <MuiLink
+            component={Link}
+            underline="hover"
+            sx={{ fontSize: "0.9rem" }}
+            href={href}
+          >
+            {title}
+          </MuiLink>
+        ) : (
+          <span style={{ fontSize: "0.9rem" }}>{title}</span>
+        )}
       </AccordionSummary>
       <AccordionDetails sx={{ padding: "0 8px !important" }}>
         {children}

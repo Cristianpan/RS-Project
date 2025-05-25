@@ -1,14 +1,12 @@
-import { Unit, Topic } from "@/components";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Curso: Inglés",
-};
+import { Unit, CourseTopicCard } from "@/components";
 
 export default function Course() {
   return (
-    <Unit title="Unidad 1: Los sistemas de recomendacion">
-      <Topic />
+    <Unit
+      course="Sistemas de recomendación"
+      title="Unidad 1: Los sistemas de recomendación"
+    >
+      <CourseTopicCard title="Inteligencia Artificial y los sistemas de recomendación" />
     </Unit>
   );
 }

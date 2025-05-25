@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Accordion,
   AccordionSummary,
@@ -5,13 +7,24 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+import useUnitAccordionStore from "@/stores/useUnitAccordions";
 
 interface UnitProps {
+  course: string;
   title: string;
   children: React.ReactNode;
 }
 
-export const Unit = ({ title, children }: UnitProps) => {
+export const Unit = ({ course, title, children }: UnitProps) => {
+
+  const { accordions, toggleAccordion } = useUnitAccordionStore();
+
+  const isOpen = accordions[`${course}-${title}`] || false;
+  
+  const handleChange = () => {
+    toggleAccordion(course, title);
+  }
+
   return (
     <Accordion
       sx={{
@@ -19,7 +32,8 @@ export const Unit = ({ title, children }: UnitProps) => {
         border: "none",
         boxShadow: "none",
       }}
-      expanded
+      expanded={isOpen}
+      onChange={handleChange}
     >
       <AccordionSummary
         expandIcon={
