@@ -13,8 +13,7 @@ export const AuthLayout = ({ children }: AuthLayoutProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(user);
-    if (user) {
+    if (user && user.id) {
       router.push("/courses");
     }
   }, [user, router]);

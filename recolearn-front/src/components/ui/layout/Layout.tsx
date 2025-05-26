@@ -17,7 +17,7 @@ export const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user && hydrated) {
+    if (!user?.id && hydrated) {
       router.push("/login");
     }
   }, [user, router, hydrated]);
