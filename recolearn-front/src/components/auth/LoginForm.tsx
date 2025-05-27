@@ -1,8 +1,5 @@
 "use client";
 import {
-  Card,
-  CardContent,
-  Typography,
   FormControl,
   InputLabel,
   Select,
@@ -17,6 +14,7 @@ import { loginAdapter } from "@/adapters/login";
 import useAuthStore from "@/stores/useAuthStore";
 import { IStudent } from "@/interfaces/student";
 import { getStudentsAdapter } from "@/adapters/getStudents";
+import { CardAuthForm } from "./CardAuthForm";
 
 export const LoginForm = () => {
   const [selectedStudent, setSelectedStudent] = useState<number>();
@@ -50,76 +48,54 @@ export const LoginForm = () => {
   };
 
   return (
-    <>
-      <Card sx={{ padding: 2, width: "35rem", textAlign: "center" }}>
-        <CardContent>
-          <Typography
-            variant="h1"
-            sx={{
-              fontSize: "1.5rem",
-              margin: "1rem 0",
-              fontWeight: "bold",
-              color: "text.primary",
+    <CardAuthForm label="Iniciar Sesión">
+      <form onSubmit={handleSubmit}>
+        <FormControl fullWidth>
+          <InputLabel>Estudiante</InputLabel>
+          <Select
+            value={selectedStudent || ""}
+            label="Estudiante"
+            onChange={handleChange}
+            MenuProps={{
+              PaperProps: {
+                style: {
+                  maxHeight: 200, // Altura máxima del dropdown
+                  overflowY: "auto", // Scroll vertical si hay más elementos
+                },
+              },
             }}
           >
-            RecomLearn - FMAT
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: "1.2rem",
-              margin: "1rem 0",
-              color: "text.primary",
-              fontWeight: "semi-bold",
-            }}
-          >
+            {users.map(({ id, name }) => (
+              <MenuItem key={id} value={id}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <Box
+          sx={{
+            marginTop: "1rem",
+            width: "100%",
+            display: "flex",
+            gap: "0.25rem",
+            flexDirection: "column",
+          }}
+        >
+          <Button type="submit" variant="contained" sx={{ marginTop: "1rem" }}>
             Iniciar Sesión
-          </Typography>
+          </Button>
 
-          <form onSubmit={handleSubmit}>
-            <FormControl fullWidth>
-              <InputLabel>Estudiante</InputLabel>
-              <Select
-                value={selectedStudent || ""}
-                label="Estudiante"
-                onChange={handleChange}
-              >
-                {users.map(({id, name}) => (
-                  <MenuItem key={id} value={id}>
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-
-            <Box
-              sx={{
-                marginTop: "1rem",
-                width: "100%",
-                display: "flex",
-                gap: "0.25rem",
-                flexDirection: "column",
-              }}
-            >
-              <Button
-                type="submit"
-                variant="contained"
-                sx={{ marginTop: "1rem" }}
-              >
-                Iniciar Sesión
-              </Button>
-
-              <Button
-                variant="outlined"
-                sx={{ marginTop: "1rem" }}
-                LinkComponent={Link}
-                href="/signup"
-              >
-                ¡Registrarte!
-              </Button>
-            </Box>
-          </form>
-        </CardContent>
-      </Card>
-    </>
+          <Button
+            variant="outlined"
+            sx={{ marginTop: "1rem" }}
+            LinkComponent={Link}
+            href="/signup"
+          >
+            ¡Registrarte!
+          </Button>
+        </Box>
+      </form>
+    </CardAuthForm>
   );
 };

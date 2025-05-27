@@ -1,18 +1,11 @@
 import { Typography, Box, Divider } from "@mui/material";
-import { ActivitiesSection } from "@/components";
+import { ActivitiesSection, TopicHeader } from "@/components";
 
 export default function Topic() {
   return (
     <>
       <Box sx={{ padding: "1rem" }}>
-        <Typography variant="h1" sx={{ fontSize: "2rem" }}>
-          Recomendacion 1
-        </Typography>
-        <Typography
-          sx={{ fontSize: "0.9rem", color: "secondary.500", marginTop: "1rem" }}
-        >
-          Duración: 1 año
-        </Typography>
+        <TopicHeader />
 
         <Divider sx={{ borderColor: "grey.400", margin: "1rem 0" }} />
 

@@ -6,4 +6,5 @@ export { LoginForm } from "@/components/auth/LoginForm";
 export { AuthLayout } from "@/components/auth/AuthLayout";
 export { Loader } from "@/components/ui/Loader";
 export { SignupForm } from "@/components/auth/SignupForm";
-export {ActivitiesSection} from "@/components/topic/ActivitiesSection";
+export { ActivitiesSection } from "@/components/topic/ActivitiesSection";
+export { TopicHeader } from "@/components/topic/TopicHeader";

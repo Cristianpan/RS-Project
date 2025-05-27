@@ -2,8 +2,6 @@ import { CourseTopicRecommendations } from "@/components/course/CourseTopicRecom
 import { CourseTopicTitle } from "@/components/course/CourseTopicTitle";
 import { Box } from "@mui/material";
 
-
-
 export default function PreviewTopic() {
   return (
     <Box sx={{ padding: "0.5rem" }}>
