@@ -1,17 +1,20 @@
 from app.config.connect_to_database import connect_to_database
 
 
-def get_most_popular_content_type() -> dict:
+def get_most_popular_content_type(blindness_level: int) -> dict:
     conn = connect_to_database()
     query = (
-        "SELECT content_id as id, content, AVG(content_rate) as score FROM student_interactions "
+        "SELECT content_id as id, content, AVG(content_rate) as score, AVG(content_duration) as duration "
+        "FROM student_interactions "
         "INNER JOIN content_types on student_interactions.content_id = content_types.id "
+        "INNER JOIN students on student_interactions.student_id = students.id "
+        "WHERE students.blindness_level >= ? "
         "GROUP BY content_id ORDER BY content_rate DESC LIMIT 5"
     )
 
     cursor = conn.cursor()
 
-    cursor.execute(query)
+    cursor.execute(query, (blindness_level,))
     popular_content_types = cursor.fetchall()
     popular_content_types = [dict(popular_content_type) for popular_content_type in popular_content_types]
 

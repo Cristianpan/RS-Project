@@ -28,7 +28,7 @@ def get_content_recommendation(student_id: int) -> tuple:
         has_interactions = has_interactions_by_student_id(student_id)
 
         if not has_interactions:
-            recom = get_most_popular_content_type()
+            recom = get_most_popular_content_type(student["blindness_level"])
             return ResponseWrapper(recom, True, None).to_dict(), 200
 
         students_data = get_students_data()
@@ -59,7 +59,7 @@ def get_activity_recommendation(student_id: int, content_id: int) -> tuple:
         has_interactions = has_interactions_by_student_id(student_id)
 
         if not has_interactions:
-            recom = get_most_popular_activity_by_content(content_id)
+            recom = get_most_popular_activity_by_content(content_id, student["blindness_level"])
             return ResponseWrapper(recom, True, None).to_dict(), 200
 
         students_data = get_students_data()
