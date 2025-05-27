@@ -15,7 +15,7 @@ def get_student_by_id(user_id: int) -> dict:
 
 def get_students_data() -> dict: 
     conn = connect_to_database()
-    query = "SELECT id as student_id, blindness_level FROM students"
+    query = "SELECT id as student_id, blindness_level, name FROM students"
     cursor = conn.cursor()
 
     cursor.execute(query)
