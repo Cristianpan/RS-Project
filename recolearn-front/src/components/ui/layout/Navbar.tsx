@@ -9,21 +9,46 @@ import {
   Button,
   Menu,
   MenuItem,
+  Typography,
+  Divider,
 } from "@mui/material";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
 import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
 import { Avatar } from "./Avatar";
 import NextLink from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuthStore from "@/stores/useAuthStore";
+import { FontSizeAdjuster } from "./FontSizeAdjuster";
+import useAdjustedFontSizeStore from "@/stores/useAdjustedFontSize";
+
+const DEFULT_FONT_SIZE = 100;
 
 export const Navbar = () => {
   const { logout, user } = useAuthStore();
+  const { adjustedFontSize, setAdjustedFontSize } = useAdjustedFontSizeStore();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    if (user && user.id) {
+      const adjustedValue = user.blindnessLevel * 10;
+
+      setAdjustedFontSize(DEFULT_FONT_SIZE + adjustedValue);
+    }
+  }, [user, setAdjustedFontSize]);
+
+  useEffect(() => {
+    document.documentElement.style.fontSize = `${adjustedFontSize}%`;
+
+    return () => {
+      document.documentElement.style.fontSize = `${DEFULT_FONT_SIZE}%`;
+    };
+  }, [adjustedFontSize, setAdjustedFontSize]);
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -110,11 +135,30 @@ export const Navbar = () => {
                 "& .MuiMenu-paper": {
                   top: "3.5rem !important",
                   left: "auto !important",
-                  right: "2rem !important",
+                  right: "3rem !important",
+                  width: "15rem",
+                  padding: "0.5rem",
                 },
               }}
             >
-              <MenuItem onClick={() => logout()}>Cerrar Sesión</MenuItem>
+              <MenuItem sx={{ marginBottom: "0.5rem" }}>
+                <Typography sx={{ fontSize: "1rem", fontWeight: 500 }}>
+                  ¡Bienvenido de nuevo!
+                </Typography>
+              </MenuItem>
+              <Divider />
+              <MenuItem sx={{ marginBottom: "0.5rem" }}>
+                <FontSizeAdjuster />
+              </MenuItem>
+              <Divider />
+              <MenuItem
+                onClick={() => {
+                  logout();
+                  setAdjustedFontSize(DEFULT_FONT_SIZE);
+                }}
+              >
+                Cerrar Sesión
+              </MenuItem>
             </Menu>
           </div>
         </Box>

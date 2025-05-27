@@ -59,8 +59,8 @@ export const LoginForm = () => {
             MenuProps={{
               PaperProps: {
                 style: {
-                  maxHeight: 200, // Altura máxima del dropdown
-                  overflowY: "auto", // Scroll vertical si hay más elementos
+                  maxHeight: 200,
+                  overflowY: "auto",
                 },
               },
             }}

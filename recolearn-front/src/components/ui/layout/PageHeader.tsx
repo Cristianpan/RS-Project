@@ -19,10 +19,10 @@ export const PageHeader = () => {
 
   useEffect(() => {
     const segments = pathname.split("/").filter(Boolean);
-    const newBreadcrumbs: { label: string; href: string }[] = []
 
     if (segments.includes("courses")) {
       setTitle("Mis Cursos");
+      setBreadcrumbs([{ label: "Mis Cursos", href: "/courses" }]);
     }
 
     if (segments.includes("course")) {
@@ -31,9 +31,11 @@ export const PageHeader = () => {
         " "
       );
       setTitle(title);
-      newBreadcrumbs.push({ label: title, href: pathname });
+      setBreadcrumbs([
+        { label: "Mis Cursos", href: "/courses" },
+        { label: title, href: pathname },
+      ]);
     }
-    setBreadcrumbs([{ label: "Mis Cursos", href: "/courses" }, ...newBreadcrumbs]);
   }, [pathname]);
 
   return (
