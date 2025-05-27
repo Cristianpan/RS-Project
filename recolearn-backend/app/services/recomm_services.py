@@ -10,7 +10,7 @@ from app.database.activities_repository import (
 )
 from app.database.students_repository import get_student_by_id
 from app.database.students_repository import get_students_data
-from app.database.students_interactions_repository import get_students_interactions
+from app.database.students_interactions_repository import get_students_interactions, has_interactions_by_student_id
 
 
 from app.model.recommender.get_content_recomm import get_content_recomm
@@ -24,8 +24,10 @@ _ACTIVITY_MODEL_FILE = "data/activity_model.pkl"
 def get_content_recommendation(student_id: int) -> tuple:
     try:
         student = get_student_by_id(student_id)
+        
+        has_interactions = has_interactions_by_student_id(student_id)
 
-        if not student:
+        if not has_interactions:
             recom = get_most_popular_content_type()
             return ResponseWrapper(recom, True, None).to_dict(), 200
 
@@ -54,7 +56,9 @@ def get_activity_recommendation(student_id: int, content_id: int) -> tuple:
     try:
         student = get_student_by_id(student_id)
 
-        if not student:
+        has_interactions = has_interactions_by_student_id(student_id)
+
+        if not has_interactions:
             recom = get_most_popular_activity_by_content(content_id)
             return ResponseWrapper(recom, True, None).to_dict(), 200
 

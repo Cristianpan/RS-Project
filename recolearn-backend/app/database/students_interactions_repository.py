@@ -16,3 +16,15 @@ def get_students_interactions():
     conn.close()
 
     return user_interactions
+
+def has_interactions_by_student_id(student_id: int):
+    conn = connect_to_database()
+    query = "SELECT COUNT(*) FROM student_interactions WHERE student_id =?"
+    cursor = conn.cursor()
+
+    cursor.execute(query, (student_id,))
+    count = cursor.fetchone()[0]
+
+    conn.close()
+
+    return count > 0

@@ -4,7 +4,7 @@ from app.config.connect_to_database import connect_to_database
 def get_most_popular_content_type() -> dict:
     conn = connect_to_database()
     query = (
-        "SELECT content_id, content, AVG(content_rate) as content_rate FROM student_interactions "
+        "SELECT content_id as id, content, AVG(content_rate) as score FROM student_interactions "
         "INNER JOIN content_types on student_interactions.content_id = content_types.id "
         "GROUP BY content_id ORDER BY content_rate DESC LIMIT 5"
     )
