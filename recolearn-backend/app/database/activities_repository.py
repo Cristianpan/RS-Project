@@ -24,7 +24,13 @@ def get_activities_by_ids(activity_ids: list) -> list:
         return []
 
     conn = connect_to_database()
-    query = "SELECT * FROM activities WHERE id IN ({})".format(','.join('?' * len(activity_ids)))
+
+    query = (
+        "SELECT activity_id as id, activity, AVG(activity_duration) as duration FROM activities "
+        "INNER JOIN student_interactions on student_interactions.activity_id = activities.id "
+        "WHERE activity_id IN ({}) ".format(','.join('?' * len(activity_ids))) + 
+        "GROUP BY activity_id"
+    )
 
     cursor = conn.cursor()
 

@@ -24,8 +24,14 @@ def get_contents_by_ids(content_ids: list) -> list:
         return []
 
     conn = connect_to_database()
-    query = "SELECT * FROM content_types WHERE id IN ({})".format(','.join('?' * len(content_ids)))
 
+    query = (
+        "SELECT content_id as id, content, AVG(content_duration) as duration FROM content_types "
+        "INNER JOIN student_interactions on student_interactions.content_id = content_types.id "
+        "WHERE content_id IN ({}) ".format(','.join('?' * len(content_ids))) + 
+        "GROUP BY content_id"
+    )
+    
     cursor = conn.cursor()
 
     cursor.execute(query, content_ids)
