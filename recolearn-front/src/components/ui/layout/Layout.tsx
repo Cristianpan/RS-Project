@@ -1,5 +1,5 @@
 "use client";
-import { Box, Card } from "@mui/material";
+import { Box, Card, useMediaQuery } from "@mui/material";
 import { Navbar } from "./Navbar";
 import { PageHeader } from "./PageHeader";
 import { Sidebar } from "./Sidebar/Sidebar";
@@ -15,6 +15,7 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   const { user, hydrated } = useAuthStore();
+  const matches = useMediaQuery("(min-width:728px)");
   const router = useRouter();
 
   useEffect(() => {
@@ -27,20 +28,29 @@ export const Layout = ({ children }: LayoutProps) => {
     return <Loader />;
   }
 
+  const desktopStyles = {
+    alignItems: "flex-start",
+    flexDirection: "row"
+  };
+
+  const mobileStyles = {
+    flexDirection: "column-reverse"
+  }
+
   return (
     <>
       <Navbar />
       <PageHeader />
+      <Recommendations />
       <Box
         sx={{
           display: "flex",
-          alignItems: "flex-start",
           gap: "1rem",
           margin: "0 1rem 3.5rem 1rem",
+          ...(matches ? desktopStyles : mobileStyles)
         }}
       >
         <Sidebar sx={{ flex: 1 }} />
-        <Recommendations />
         <Card variant="outlined" sx={{ padding: "1.2rem 1rem", flex: 4 }}>
           {children}
         </Card>

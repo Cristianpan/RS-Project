@@ -135,7 +135,7 @@ export const Navbar = () => {
                 "& .MuiMenu-paper": {
                   top: "3.5rem !important",
                   left: "auto !important",
-                  right: "3rem !important",
+                  right: "30px !important",
                   width: "15rem",
                   padding: "0.5rem",
                 },

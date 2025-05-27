@@ -22,7 +22,7 @@ export const ActivitiesSection = () => {
         Actividades recomendadas para el contenido: {currentContent?.content}
       </Typography>
 
-      <Divider sx={{ borderColor: "grey.400", margin: "1rem 0 0.5rem 0" }} />
+      <Divider sx={{ borderColor: "grey.400", margin: "0.5rem 0 0.5rem 0" }} />
       <List
         sx={{
           listStyleType: "disc",
