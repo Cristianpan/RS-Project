@@ -18,6 +18,8 @@ from app.model.recommender.get_lightfm_dataset import (
     get_activity_dataset,
 )
 
+from app.utils.adjust_scores import adjust_scores
+
 _ACTIVITY_BOOST_FILE = "data/activity_boosting.csv"
 
 
@@ -62,24 +64,6 @@ def get_activity_recomm(
     )
 
     return activity_recomms
-
-
-def _scores_adjust(activity_recomms):
-    df_boosts = pd.read_csv(_ACTIVITY_BOOST_FILE)
-
-    boosts = dict(zip(df_boosts["id"], df_boosts["boost"]))
-
-    for item in activity_recomms:
-        activity_id = item["activity_id"]
-        if activity_id in boosts:
-            boost = boosts[activity_id]
-            if item["score"] >= 0:
-                item["score"] *= 1 + boost
-            else:
-                item["score"] *= 1 - boost
-
-    return activity_recomms
-
 
 def _generate_recomms(
     student_id: int,
@@ -190,8 +174,6 @@ def _generate_recomms(
         for content_id, score in recomendaciones
     ]
 
-    recomendaciones = _scores_adjust(recomendaciones)
-
-    recomendaciones = sorted(recomendaciones, key=lambda x: -x["score"])
-
+    recomendaciones = adjust_scores(_ACTIVITY_BOOST_FILE, recomendaciones, "activity_id")
+    
     return recomendaciones[0:5]

@@ -1,5 +1,7 @@
 from app.config.connect_to_database import connect_to_database
+from app.utils.adjust_scores import adjust_scores
 
+_CONTENT_BOOST_FILE = "data/content_boosting.csv"
 
 def get_most_popular_content_type(blindness_level: int) -> dict:
     conn = connect_to_database()
@@ -9,7 +11,7 @@ def get_most_popular_content_type(blindness_level: int) -> dict:
         "INNER JOIN content_types on student_interactions.content_id = content_types.id "
         "INNER JOIN students on student_interactions.student_id = students.id "
         "WHERE students.blindness_level >= ? "
-        "GROUP BY content_id ORDER BY content_rate DESC LIMIT 5"
+        "GROUP BY content_id ORDER BY content_rate DESC"
     )
 
     cursor = conn.cursor()
@@ -18,9 +20,11 @@ def get_most_popular_content_type(blindness_level: int) -> dict:
     popular_content_types = cursor.fetchall()
     popular_content_types = [dict(popular_content_type) for popular_content_type in popular_content_types]
 
+    recomendaciones = adjust_scores(_CONTENT_BOOST_FILE, popular_content_types, "id")
+
     conn.close()
 
-    return popular_content_types
+    return recomendaciones[0:5]
 
 def get_contents_by_ids(content_ids: list) -> list:
     if not content_ids:

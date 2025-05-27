@@ -14,6 +14,8 @@ from app.model.recommender.get_lightfm_dataset import (
     get_content_dataset,
 )
 
+from app.utils.adjust_scores import adjust_scores
+
 _CONTENT_BOOST_FILE = "data/content_boosting.csv"
 
 def get_content_recomm(student, students_data, students_interactions, model_file):
@@ -107,24 +109,6 @@ def _generate_recomm(
         for content_id, score in recomendaciones
     ]
 
-    recomendaciones = _scores_adjust(recomendaciones)
-
-    recomendaciones = sorted(recomendaciones, key=lambda x: -x["score"])
+    recomendaciones = adjust_scores(_CONTENT_BOOST_FILE, recomendaciones, "content_id")
 
     return recomendaciones[0:5]  # Devuelve las 5 mejores recomendaciones
-
-def _scores_adjust(content_recomms):
-    df_boosts = pd.read_csv(_CONTENT_BOOST_FILE)
-
-    boosts = dict(zip(df_boosts["id"], df_boosts["boost"]))
-
-    for item in content_recomms:
-        content_id = item["content_id"]
-        if content_id in boosts:
-            boost = boosts[content_id]
-            if item["score"] >= 0:
-                item["score"] *= 1 + boost
-            else:
-                item["score"] *= 1 - boost
-
-    return content_recomms
