@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import useRecommendationStore from "@/stores/useRecommendationStore";
+import { ceilingWithPrecision, generateSlug } from "@/utils";
 
 interface CourseTopicRecommendationsProps {
   label: string;
@@ -60,7 +61,7 @@ export const CourseTopicRecommendations = ({
               }}
             >
               <MuiLink
-                href={`/topic/${content.content}`}
+                href={`/topic/${generateSlug(content.content)}`}
                 underline="hover"
                 component={Link}
                 onClick={() => setCurrentContent(content)}
@@ -73,7 +74,8 @@ export const CourseTopicRecommendations = ({
                   },
                 }}
               >
-                {content.content}
+                {content.content} - Duración Aproximada:{" "}
+                {ceilingWithPrecision(content.duration)} min
               </MuiLink>
             </ListItem>
           ))}

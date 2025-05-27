@@ -2,6 +2,7 @@
 import { Typography, Divider, List, ListItem } from "@mui/material";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import useRecommendationStore from "@/stores/useRecommendationStore";
+import { ceilingWithPrecision } from "@/utils";
 
 export const ActivitiesSection = () => {
   const { activities, currentContent } = useRecommendationStore();
@@ -28,7 +29,6 @@ export const ActivitiesSection = () => {
           pl: 4,
         }}
       >
-
         {activities.map((activity) => (
           <ListItem
             key={activity.id}
@@ -39,7 +39,8 @@ export const ActivitiesSection = () => {
               color: "primary.main",
             }}
           >
-            {activity.activity}
+            {activity.activity} - Duración Aproximada:{" "}
+            {ceilingWithPrecision(activity.duration)} min
           </ListItem>
         ))}
       </List>

@@ -9,8 +9,13 @@ import { useEffect } from "react";
 export const Recommendations = () => {
   const { user } = useAuthStore();
 
-  const { currentContent, contents, setContents, setActivities } =
-    useRecommendationStore();
+  const {
+    currentContent,
+    contents,
+    setContents,
+    setActivities,
+    setCurrentContent,
+  } = useRecommendationStore();
 
   useEffect(() => {
     async function getRecommendations(studentId: number) {
@@ -22,8 +27,9 @@ export const Recommendations = () => {
       getRecommendations(user.id);
     } else {
       setContents([]);
+      setCurrentContent(null);
     }
-  }, [user, setContents]);
+  }, [user, setContents, setCurrentContent]);
 
   useEffect(() => {
     async function getRecommendations(studentId: number, contentId: number) {
