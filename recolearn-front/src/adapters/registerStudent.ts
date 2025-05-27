@@ -1,4 +1,4 @@
-import { IStudent } from "./../interfaces/student";
+import { IStudent } from "@/interfaces/student";
 import { IAPIResponse } from "@/interfaces/api-response";
 import { apiUrls } from "@/constants/api-url";
 
@@ -8,11 +8,20 @@ interface IStudentResponse {
   blindness_level: number;
 }
 
-export const loginAdapter = async (id: number): Promise<IStudent | null> => {
+export const registerStudent = async (
+  name: string,
+  blindnessLevel: number
+): Promise<IStudent | null> => {
   const { students: studentAPI } = apiUrls;
-  const response = await fetch(studentAPI.byId(id));
+  const response = await fetch(studentAPI.all, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, blindness_level: blindnessLevel }),
+  });
 
-  if (response.status === 200) {
+  if (response.status === 201) {
     const data: IAPIResponse<IStudentResponse> = await response.json();
 
     const { body: student } = data;

@@ -7,6 +7,7 @@ import { ReactNode, useEffect } from "react";
 import useAuthStore from "@/stores/useAuthStore";
 import { useRouter } from "next/navigation";
 import { Loader } from "../Loader";
+import { Recommendations } from "../Recommendations";
 
 interface LayoutProps {
   children: ReactNode;
@@ -39,6 +40,7 @@ export const Layout = ({ children }: LayoutProps) => {
         }}
       >
         <Sidebar sx={{ flex: 1 }} />
+        <Recommendations />
         <Card variant="outlined" sx={{ padding: "1.2rem 1rem", flex: 4 }}>
           {children}
         </Card>

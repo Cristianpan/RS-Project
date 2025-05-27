@@ -15,12 +15,12 @@ import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { loginAdapter } from "@/adapters/login";
 import useAuthStore from "@/stores/useAuthStore";
-import { IUser } from "@/interfaces/User";
-import { getUsersAdapter } from "@/adapters/getUsers";
+import { IStudent } from "@/interfaces/student";
+import { getStudentsAdapter } from "@/adapters/getStudents";
 
 export const LoginForm = () => {
   const [selectedStudent, setSelectedStudent] = useState<number>();
-  const [users, setUsers] = useState<IUser[]>([]);
+  const [users, setUsers] = useState<IStudent[]>([]);
 
   const { login } = useAuthStore();
 
@@ -31,7 +31,7 @@ export const LoginForm = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const users = await getUsersAdapter();
+      const users = await getStudentsAdapter();
       setUsers(users);
     };
     fetchUsers();
@@ -42,6 +42,10 @@ export const LoginForm = () => {
     const user = await loginAdapter(selectedStudent ?? 0);
     if (user) {
       login(user);
+    }
+
+    if (!user) {
+      alert("Error al iniciar sesión. Inténtalo de nuevo.");
     }
   };
 

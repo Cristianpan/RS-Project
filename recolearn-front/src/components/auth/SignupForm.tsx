@@ -1,5 +1,4 @@
 "use client";
-
 import useAuthStore from "@/stores/useAuthStore";
 import {
   Box,
@@ -15,8 +14,8 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-
 import { FormEvent, useState } from "react";
+import { registerStudent } from "@/adapters/registerStudent";
 
 export const SignupForm = () => {
   const [blindnessLevel, setBlindnessLevel] = useState<number>(0);
@@ -30,13 +29,14 @@ export const SignupForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const user = {
-      id: 1000,
-      name,
-      blindnessLevel,
-    };
+    const student = await registerStudent(name, blindnessLevel);
 
-    login(user);
+    if (!student) {
+      alert("Error al registrarse. Inténtalo de nuevo.");
+      return;
+    }
+
+    login(student);
   };
 
   return (

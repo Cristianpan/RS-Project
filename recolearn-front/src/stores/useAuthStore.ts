@@ -1,13 +1,12 @@
-import { IUser } from "@/interfaces/User";
+import { IStudent } from "@/interfaces/student";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface AuthStoreProps {
-  user: IUser | null;
-
+  user: IStudent | null;
   hydrated: boolean;
   setHydrated: (hydrated: boolean) => void;
-  login: (user: IUser) => void;
+  login: (user: IStudent) => void;
   logout: () => void;
 }
 

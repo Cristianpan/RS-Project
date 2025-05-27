@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -10,16 +12,18 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
+import useRecommendationStore from "@/stores/useRecommendationStore";
 
 interface CourseTopicRecommendationsProps {
   label: string;
-  recommendations: {
-    label: string;
-    duration: string;
-  }[];
 }
 
-export const CourseTopicRecommendations = ({label, recommendations}: CourseTopicRecommendationsProps) => {
+export const CourseTopicRecommendations = ({
+  label,
+}: CourseTopicRecommendationsProps) => {
+  const { contents: recommendations, setCurrentContent } =
+    useRecommendationStore();
+
   return (
     <Card
       variant="outlined"
@@ -47,33 +51,32 @@ export const CourseTopicRecommendations = ({label, recommendations}: CourseTopic
             pl: 4,
           }}
         >
-          {
-            recommendations.map((recommendation, index) => (
-              <ListItem
-                key={index}
-                disableGutters
+          {recommendations.map((content) => (
+            <ListItem
+              key={content.id}
+              disableGutters
+              sx={{
+                display: "list-item",
+              }}
+            >
+              <MuiLink
+                href={`/topic/${content.content}`}
+                underline="hover"
+                component={Link}
+                onClick={() => setCurrentContent(content)}
                 sx={{
-                  display: "list-item",
+                  fontSize: "0.9rem",
+                  color: "primary.main",
+                  "&:hover": {
+                    color: "secondary.500",
+                    borderColor: "secondary.primary",
+                  },
                 }}
               >
-                <MuiLink
-                  href={`/topic/${recommendation.label}`}
-                  underline="hover"
-                  component={Link}
-                  sx={{
-                    fontSize: "0.9rem",
-                    color: "primary.main",
-                    "&:hover": {
-                      color: "secondary.500",
-                      borderColor: "secondary.primary",
-                    },
-                  }}
-                >
-                  {recommendation.label} - Duración aproximada: {recommendation.duration}
-                </MuiLink>
-              </ListItem>
-            ))
-          }
+                {content.content}
+              </MuiLink>
+            </ListItem>
+          ))}
         </List>
       </CardContent>
     </Card>

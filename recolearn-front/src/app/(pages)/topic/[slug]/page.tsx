@@ -1,5 +1,5 @@
-import { Typography, Box, Divider, List, ListItem } from "@mui/material";
-import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
+import { Typography, Box, Divider } from "@mui/material";
+import { ActivitiesSection } from "@/components";
 
 export default function Topic() {
   return (
@@ -45,61 +45,12 @@ export default function Topic() {
           pretium, sit amet vestibulum neque posuere. Suspendisse nunc turpis,
           lobortis ut suscipit at, ultricies vulputate orci.
         </Typography>
-        <Box sx={{marginTop: "2rem"}}>
+        <Box sx={{ marginTop: "2rem" }}>
           <Typography variant="h2" sx={{ fontSize: "1.6rem" }}>
             ¡Evalua tus conocimientos!
           </Typography>
-          <Typography
-            sx={{
-              fontSize: "0.9rem",
-              color: "secondary.500",
-              marginTop: "1rem",
-            }}
-          >
-            <TipsAndUpdatesIcon
-              sx={{ fontSize: "1.2rem", color: "secondary.500" }}
-            />{" "}
-            Porque tus amigos reprobaron todo, te recomendamos lo siguiente...
-          </Typography>
 
-          <Divider sx={{ borderColor: "grey.400", margin: "1rem 0 0.5rem 0" }} />
-          <List
-            sx={{
-              listStyleType: "disc",
-              pl: 4,
-            }}
-          >
-            <ListItem
-              disableGutters
-              sx={{
-                display: "list-item",
-                fontSize: "0.9rem",
-                color: "primary.main",
-              }}
-            >
-              Recomendación 1 - Duración aproximada: 1 año
-            </ListItem>
-            <ListItem
-              disableGutters
-              sx={{
-                display: "list-item",
-                fontSize: "0.9rem",
-                color: "primary.main",
-              }}
-            >
-              Recomendación 1 - Duración aproximada: 1 año
-            </ListItem>
-            <ListItem
-              disableGutters
-              sx={{
-                display: "list-item",
-                fontSize: "0.9rem",
-                color: "primary.main",
-              }}
-            >
-              Recomendación 1 - Duración aproximada: 1 año
-            </ListItem>
-          </List>
+          <ActivitiesSection />
         </Box>
       </Box>
     </>
