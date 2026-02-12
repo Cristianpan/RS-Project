@@ -23,7 +23,7 @@ def save_student():
     return jsonify(response), status
 
 
-@student_blueprint.route("/<int:student_id>/", methods=["GET"])
+@student_blueprint.route("/<int:student_id>", methods=["GET"])
 def get_by_id(student_id: int):
     response, status = get_student_id(student_id)
     return jsonify(response), status
